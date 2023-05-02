@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: commerce
+
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/commerce
+    username: commerce
+    password: commerce
+    driverClassName: org.postgresql.Driver
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    org:
+      springframework:
+        http.server.reactive: DEBUG
+        web: DEBUG
+        security: DEBUG
+    com.evizi: DEBUG
+
+config:
+  # vanity-hostname: Sets the HTTP "Location" header for the service.
+  vanity-hostname: "http://localhost:${server.port}"
+  # CORS header
+  cors:
+    allowed-origins: "*://localhost:*/*"
+  jwt:
+    jwtSecret: MGYKwGJSWZGokkSwkgu4S5s+Xi4k5ADK0osR3z8rTKc=
+    jwtExpirationMs: 86400000
+
+server:
+  port: 8001
+  servlet:
+    context-path: /commerce/
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
+    include-exception: false    
